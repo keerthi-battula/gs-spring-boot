@@ -23,7 +23,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: '**/target/*.?(war|jar)'
+    Contents: '**/*.jar'
     TargetFolder: '$(Bulid.ArtifactStagingDirectory)'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
