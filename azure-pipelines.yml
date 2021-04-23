@@ -25,9 +25,14 @@ steps:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
     Contents: '**/target/*.?(war|jar)'
     TargetFolder: '$(Bulid.ArtifactStagingDirectory)'
-- task: PublishPipelineArtifact@1
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
   inputs:
-    targetPath: '$(Bulid.ArtifactStagingDirectory)'
-    artifact: 'drop'
-    publishLocation: 'pipeline'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
